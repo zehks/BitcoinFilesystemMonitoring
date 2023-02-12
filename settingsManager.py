@@ -11,3 +11,8 @@ class SettingsManager():
         configparser.read('settings.conf')
 
         self.BITCOIN_DIR = configparser.get(DEFAULT, 'BitcoinDir')
+        
+        self.INTERVAL = configparser.get(DEFAULT, 'CheckInterval')
+
+        self.OUTPUT_DIR = configparser.get(DEFAULT, 'OutputDir')
+        self.OUTPUT_FILENAME = configparser.get(DEFAULT, 'OutputFilename')

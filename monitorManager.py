@@ -3,15 +3,20 @@ import os
 class MonitorManager():
 
     def __init__(self):
-        self.var = 'a'
+        self.directories = []
+        self.total = 0
     
     def get_fs_size(self, path: str) -> int:
 
-        total = 0
         with os.scandir(path) as it:
             for entry in it:
                 if entry.is_file():
-                    total += entry.stat().st_size
+                    self.total += entry.stat().st_size
                 elif entry.is_dir():
-                    total += self.get_fs_size(entry.path)
-        return total
+                    self.directories.append(entry.path)
+                    self.total += self.get_fs_size(entry.path)
+
+        return self.total
+
+    def reset_directories_listing(self):
+        self.directories = [] 
