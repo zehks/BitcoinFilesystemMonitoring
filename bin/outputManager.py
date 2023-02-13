@@ -23,6 +23,7 @@ class OutputManager():
             self.logManager.setDebug(f'Saving data to: {self.absolutePath}')
 
             if not os.path.exists(self.absolutePath):
+                os.makedirs(os.path.dirname(self.absolutePath), exist_ok=True)
                 self.saveToFile('timestamp,bytes,directories')
 
     def saveToFile(self, data):
