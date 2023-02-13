@@ -30,7 +30,7 @@ def main():
 
         interval = int(settingsManager.INTERVAL)
         finish = False
-        interval = 0.01
+
     except Exception as e:
         logManager.setError(str(e))
         print(str(e))
@@ -53,7 +53,7 @@ def main():
             if interval > 0:
                 sleep(interval)
                 logManager.setInfo('Wake up!')
-                
+
             else:
                 finish = True
 
