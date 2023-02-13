@@ -11,6 +11,9 @@ class LogManager():
         self.logger = logging.getLogger('monitor')
         self.logger.setLevel(self._get_level(log_level))
 
+        if not os.path.exists(os.path.abspath(log_dir)):
+            os.makedirs(os.path.dirname(abs_path), exist_ok=True)
+
         try:
             handler = RotatingFileHandler(
                 filename = abs_path,
