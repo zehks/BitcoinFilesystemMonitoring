@@ -6,17 +6,21 @@ class LogManager():
 
     def __init__(self, log_dir: str, log_level: str, log_name: str, logrotate_files: int):
         
-
-
+        abs_path = os.path.abspath(f'{log_dir}/{log_name}')
+        
         self.logger = logging.getLogger('monitor')
         self.logger.setLevel(self._get_level(log_level))
 
-        handler = RotatingFileHandler(
-            filename = os.path.abspath(f'{log_dir}/{log_name}'),
-            maxBytes = 5242880,
-            backupCount = int(logrotate_files),
-            encoding = 'utf-8'
-        )
+        try:
+            handler = RotatingFileHandler(
+                filename = abs_path,
+                maxBytes = 5242880,
+                backupCount = int(logrotate_files),
+                encoding = 'utf-8',
+                mode = 'a'
+            )
+        except Exception as e:
+            raise e
 
         handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s'))
         self.logger.addHandler(handler)
