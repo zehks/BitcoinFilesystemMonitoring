@@ -1,22 +1,26 @@
 import os
 
+from logManager import LogManager
+
 class OutputManager():
     
-    def __init__(self, 
-                outputDir: str = './',
-                fileName: str = 'output.csv'):
+    def __init__(self,
+                logManager: LogManager,
+                outputDir: str,
+                fileName: str):
 
         self.outputDir = outputDir
         self.fileName = fileName
+        self.logManager = logManager
 
         try:
             self.absolutePath = os.path.abspath(f'{self.outputDir}/{self.fileName}')
 
         except Exception as e:
-            print(str(e))
+            raise e
 
         finally:
-            print(f'Saving data to: {self.absolutePath}')
+            self.logManager.setDebug(f'Saving data to: {self.absolutePath}')
 
             if not os.path.exists(self.absolutePath):
                 self.saveToFile('timestamp,bytes,directories')
@@ -25,3 +29,4 @@ class OutputManager():
 
         with open(self.absolutePath, 'a', encoding='utf-8') as file:
             file.writelines(f'{data}\n')
+            self.logManager.setDebug(f'New output entry saved successfully')
