@@ -1,0 +1,16 @@
+[Unit]
+Description=Bitcoin Filesystem Monitoring service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+WorkingDirectory=/home/$USER/BitcoinFilesystemMonitoring/
+ExecStart=python3 ./bin/main.py
+KillSignal=SIGINT
+TimeoutSec=0
+
+[Install]
+WantedBy=multi-user.target
