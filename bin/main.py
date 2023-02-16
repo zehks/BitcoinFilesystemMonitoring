@@ -20,7 +20,7 @@ def main():
             logrotate_files = settingsManager.LOG_ROTATE_MAX_FILES
         )
 
-        monitorManager = MonitorManager(logManager, settingsManager.BITCOIN_DIR)
+        monitorManager = MonitorManager(logManager, settingsManager.BITCOIN_DIR, settingsManager.EXCLUDED_FROM_DIR)
 
         outputManager = OutputManager(
             logManager,

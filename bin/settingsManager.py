@@ -1,4 +1,5 @@
 from configparser import ConfigParser
+import json
 
 DEFAULT = 'DEFAULT'
 LOGGER = 'LOGGER'
@@ -14,7 +15,8 @@ class SettingsManager():
             configparser.read('settings.conf')
 
             self.BITCOIN_DIR = configparser.get(DEFAULT, 'BitcoinDir')
-            
+            self.EXCLUDED_FROM_DIR = json.loads(configparser.get(DEFAULT, 'Excluded'))
+
             self.INTERVAL = configparser.get(DEFAULT, 'CheckInterval')
 
             self.OUTPUT_DIR = configparser.get(DEFAULT, 'OutputDir')
